@@ -19,7 +19,8 @@ server_usuario="root" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 #IP DEL SERVIDOR REMOTO
 IP_server="localhost" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 
-
+#CONTRASEÑA DEL USUARIO DEL SERVIDOR REMOTO 
+password="usuario" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 
 #CALCULOS DE FECHAS
 
