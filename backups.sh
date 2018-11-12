@@ -6,11 +6,11 @@
 
 
 
-directorios_a_copiar="/home/usuario/redis" #============================>>>>>>>//////ESTE PARAMETRO DSE DEBE DE CAMBIAR////
+directorios_a_copiar="/home/usuario" #============================>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 
 #directorio donde voy a guardar la copia
 
-backdir="/home/usuario/Escritorio" #============================>>>>>>>//////ESTE PARAMETRO DSE DEBE DE CAMBIAR////
+backdir="/home/usuario/backups" #============================>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 servedir="/backups"
 #calcular la fecha
 
@@ -32,7 +32,7 @@ function COPIAR_A_SERVIDOR (){
 								#$1 Directorio cliente 
 								#$2 directorio serve
 
-								sshpass -p 'usuario' rsync --progress -av -e ssh  $1 usuario@localhost:$2
+								sshpass -p 'password' rsync --progress -av -e ssh  $1 usuario@IP:$2
 								
 							}
 
@@ -58,12 +58,12 @@ if [ "$diames" = "01" ]; then
 
 	if ! [[ -d $backdir/$anyo_dia_y_mes ]]; then
 		
-		mkdir $backdir/$anyo_dia_y_mes
-		mkdir $backdir/$anyo_dia_y_mes/DIFERENCIAL
-		mkdir $backdir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'usuario' ssh usuario@localhost mkdir $servedir/$anyo_dia_y_mes
-		sshpass -p 'usuario' ssh usuario@localhost mkdir $servedir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'usuario' ssh usuario@localhost mkdir $servedir/$anyo_dia_y_mes/DIFERENCIAL
+		mkdir -p $backdir/$anyo_dia_y_mes
+		mkdir -p $backdir/$anyo_dia_y_mes/DIFERENCIAL
+		mkdir -p $backdir/$anyo_dia_y_mes/INCREMENTAL
+		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes
+		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
+		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
 	fi
 
 	# si es dia 1 del mes hace una copia completa de los directorios que queremos
