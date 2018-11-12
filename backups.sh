@@ -24,6 +24,8 @@ mas_7dia=`date +%F --date='+7 day'` #SUMA 7 DIAS A LA FECHA ACTUAL
 
 ult_dia_mes=`date -d "$(date -d "+1 month" "+%Y%m01") - 6 day" "+%d"` #si sobrepasa esta fecha no se realiza copia ya que la copia  se realizaria en el rango del mes siguiente
 
+carpeta_mes_pasado=`date +%F --date='-1 month'` #MES ANTERIOR AL ACTUAL
+
 #FUNCIONES
 function COPIAR_A_SERVIDOR (){
 								#script para sincronizar carpeta desde un servidor hacia una maquina cliente
@@ -75,6 +77,12 @@ if [ "$diames" = "01" ]; then
 	#FICHERO DE CONTROL
 	echo "$anyo_dia_y_mes" >  $backdir/.fichero_de_directorio
 	echo "$mas_6dia" >  $backdir/.fichero_de_control
+	
+	#BORRA LAS BACKUPS LOCALES (CLIENTE) DEL MES ANTERIOR, SÍ EXISTE
+	
+	if [[ -d $backdir/$carpeta_mes_pasado ]]; then
+		rm -rf $backdir/$carpeta_mes_pasado
+	fi
 
 
 ## REALIZA LA COPIA DE SEGURIDAD DIFERENCIAL CADA SEMANA.
