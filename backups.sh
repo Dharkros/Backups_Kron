@@ -42,7 +42,7 @@ function COPIAR_A_SERVIDOR (){
 								#$1 Directorio cliente 
 								#$2 directorio serve
 
-								sshpass -p '$password' rsync --progress -av -e ssh  $1 $server_usuario@$IP_server:$2
+								sshpass -p "$password" rsync --progress -av -e ssh  $1 $server_usuario@$IP_server:$2
 								
 							}
 
@@ -71,9 +71,9 @@ if [ "$diames" = "01" ]; then
 		mkdir -p $backdir/$anyo_dia_y_mes
 		mkdir -p $backdir/$anyo_dia_y_mes/DIFERENCIAL
 		mkdir -p $backdir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes
-		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
+		sshpass -p "$password" ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes
+		sshpass -p "$password" ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
+		sshpass -p "$password" ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
 	fi
 
 	# si es dia 1 del mes hace una copia completa de los directorios que queremos
