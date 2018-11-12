@@ -4,8 +4,6 @@
 
 #Aquí introduzco el directorio del cual quiero hacer la copia
 
-
-
 directorios_a_copiar="/home/usuario" #===>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 
 #DIRECTORIO DONDE SE GUARDAR LAS COPIA
@@ -15,7 +13,13 @@ backdir="/home/usuario/backups" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMB
 #AQUÍ INTRODUZCO EL DIRECTORIO DEL CUAL QUIERO HACER LA COPIA
 servedir="/backups"
 
-server_usuario="root" #USUARIO REMOTO AL QUE SE CONECTARA EL RSYNC
+#USUARIO REMOTO AL QUE SE CONECTARA EL RSYNC
+server_usuario="root" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
+
+#IP DEL SERVIDOR REMOTO
+IP_server="localhost" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
+
+
 
 #CALCULOS DE FECHAS
 
@@ -33,11 +37,11 @@ carpeta_mes_pasado=`date +%F --date='-1 month'` #MES ANTERIOR AL ACTUAL
 
 #FUNCIONES
 function COPIAR_A_SERVIDOR (){
-								#script para sincronizar carpeta desde un servidor hacia una maquina cliente
+								#COMANDO para sincronizar carpeta desde un servidor hacia una maquina SERVIDOR REMOTA
 								#$1 Directorio cliente 
 								#$2 directorio serve
 
-								sshpass -p 'password' rsync --progress -av -e ssh  $1 $server_usuario@IP:$2
+								sshpass -p '$password' rsync --progress -av -e ssh  $1 $server_usuario@$IP_server:$2
 								
 							}
 
@@ -66,9 +70,9 @@ if [ "$diames" = "01" ]; then
 		mkdir -p $backdir/$anyo_dia_y_mes
 		mkdir -p $backdir/$anyo_dia_y_mes/DIFERENCIAL
 		mkdir -p $backdir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes
-		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
+		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes
+		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
+		sshpass -p '$password' ssh $server_usuario@$IP_server mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
 	fi
 
 	# si es dia 1 del mes hace una copia completa de los directorios que queremos
