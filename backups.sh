@@ -1,22 +1,27 @@
 #!/bin/bash
 
-#copia completa cada mes, cada semana y incremental cada dia.'
+#COPIA COMPLETA CADA MES, DIFERENCIAL CADA SEMANA E INCREMENTAL CADA DIA.'
 
 #Aquí introduzco el directorio del cual quiero hacer la copia
 
 
 
-directorios_a_copiar="/home/usuario" #============================>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
+directorios_a_copiar="/home/usuario" #===>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
 
-#directorio donde voy a guardar la copia
+#DIRECTORIO DONDE SE GUARDAR LAS COPIA
 
-backdir="/home/usuario/backups" #============================>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
+backdir="/home/usuario/backups" #====>>>>>>>//////ESTE PARAMETRO SE DEBE DE CAMBIAR////
+
+#AQUÍ INTRODUZCO EL DIRECTORIO DEL CUAL QUIERO HACER LA COPIA
 servedir="/backups"
-#calcular la fecha
 
-diames=`date +%d` #dia del mes eje: 5 <– de marzo
+server_usuario="root" #USUARIO REMOTO AL QUE SE CONECTARA EL RSYNC
 
-anyo_dia_y_mes=`date +%F` #dia y mes
+#CALCULOS DE FECHAS
+
+diames=`date +%d` #DIA DEL MES EJEMPLO: 8 <– ABRIL
+
+anyo_dia_y_mes=`date +%F` #DIAS Y MES
 
 mas_6dia=`date +%F --date='+6 day'` #SUMA 6 DIAS A LA FECHA ACTUAL
 
@@ -32,7 +37,7 @@ function COPIAR_A_SERVIDOR (){
 								#$1 Directorio cliente 
 								#$2 directorio serve
 
-								sshpass -p 'password' rsync --progress -av -e ssh  $1 usuario@IP:$2
+								sshpass -p 'password' rsync --progress -av -e ssh  $1 $server_usuario@IP:$2
 								
 							}
 
@@ -61,9 +66,9 @@ if [ "$diames" = "01" ]; then
 		mkdir -p $backdir/$anyo_dia_y_mes
 		mkdir -p $backdir/$anyo_dia_y_mes/DIFERENCIAL
 		mkdir -p $backdir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes
-		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
-		sshpass -p 'password' ssh usuario@IP mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
+		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes
+		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes/INCREMENTAL
+		sshpass -p 'password' ssh $server_usuario@$IP mkdir -p $servedir/$anyo_dia_y_mes/DIFERENCIAL
 	fi
 
 	# si es dia 1 del mes hace una copia completa de los directorios que queremos
