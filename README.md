@@ -5,7 +5,7 @@
  
 Este es un script que realiza bakups de un directorio, guardando las backups en local (cada vez que se realiza una backup completa se borra la backups del mes anterior) y en remoto en un servidor mediante la herramienta rsync el cual lo almacena todas las backups.
 
-Se realizara una backup completa cada dia 1 de cada mes,una incremental cada día y una diferencial cada semana 
+Se realizara una backup completa cada dia 1 de cada mes, una incremental cada día y una diferencial cada semana 
 
 # Dependecias
  
