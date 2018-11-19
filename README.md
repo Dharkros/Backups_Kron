@@ -8,4 +8,4 @@ Este es un script que realiza bakups completa cada dia 1 de cada mes, una increm
 # Dependecias
  
   - Instalacion de sshpass
-  - Instalacion de sshd (Serve)
+  - Instalacion de openssh (Serve)
